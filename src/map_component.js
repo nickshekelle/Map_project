@@ -5,13 +5,13 @@ import MapGL from 'react-map-gl';
 
 export default class Map extends Component {
   state = {
-    style: 'mapbox://styles/nickshekelle/cjyqkb5bz28mq1cof9u8yuk6e',
+    style: 'mapbox://styles/nickshekelle/cjyrg5pcc26c11cjvbejtc79l',
     viewport: {
       width: window.innerWidth,
       height: window.innerHeight,
-      longitude: -122.0376692,
-      latitude: 36.9734858,
-      zoom: 11,
+      longitude: -120.648,
+      latitude: 38.648,
+      zoom: 7,
       maxZoom: 16
     }
   }
