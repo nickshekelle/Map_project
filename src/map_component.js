@@ -1,58 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom'
-import mapboxgl from 'mapbox-gl'
+import React, { useState, useEffect } from "react";
+import ReactMapGL, { Marker, Popup } from "react-map-gl";
 
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
-
-class Map extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      lng: 5,
-      lat: 34,
-      zoom: 1.5
-    };
-  }
+export default function Map(){
+  const [viewport, setViewport] = useState({
+    latitude: 45.4211,
+    longitude: -75.6903,
+    width: "100vw",
+    height: "100vh",
+    zoom: 10
+  });
 
   
 
-  componentDidMount() {
-    const { lng, lat, zoom } = this.state;
+  return (
+    <div>
+      <ReactMapGL
+        {...viewport}
+        mapboxApiAccessToken='pk.eyJ1Ijoibmlja3NoZWtlbGxlIiwiYSI6ImNqeW90aWhrODE4Y20zbXA3eGNkZ2JsankifQ.ge-O4WjAvMnMBBo8rBpScw'
+        mapStyle="mapbox://styles/nickshekelle/cjyqkb5bz28mq1cof9u8yuk6e"
+        onViewportChange={viewport => {
+          setViewport(viewport);
+        }}>
 
-    const map = new mapboxgl.Map({
-      container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/streets-v9',
-      center: [lng, lat],
-      zoom
-    });
-		
-     map.on('move', () => {
-      const { lng, lat } = map.getCenter();
-
-      this.setState({
-        lng: lng.toFixed(4),
-        lat: lat.toFixed(4),
-        zoom: map.getZoom().toFixed(2)
-      });
-    });
-  }
-
-
-  render() {
-    const { lng, lat, zoom } = this.state;
-
-    return (
-      <div>
-        <div>
-          <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
+        </ReactMapGL>
         </div>
-        <div ref={el => this.mapContainer = el}/>
-      </div>
-    );
-  }
-}
-ReactDOM.render(<Map />, document.getElementById('map'));
-
-export default Map
+  );  
+}      
