@@ -10,7 +10,7 @@ export default function Navigation() {
 
   return (
     <div>
-      <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
+      <Navbar bg="dark" variant="dark" expand="lg">
         <Navbar.Brand href="#home">Flood Zone</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

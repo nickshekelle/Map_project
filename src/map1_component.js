@@ -41,7 +41,7 @@ const INITIAL_VIEW_STATE = {
   bearing: 0
 };
 
-export default class Map extends Component {
+export default class Map1 extends Component {
   constructor(props) {
     super(props);
 
@@ -120,5 +120,5 @@ export default class Map extends Component {
 }
 
 export function renderToDOM(container) {
-  render(<Map />, container);
+  render(<Map1 />, container);
 }
