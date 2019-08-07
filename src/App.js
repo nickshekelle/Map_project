@@ -13,10 +13,20 @@ import Button from 'react-bootstrap/Button'
 
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    var whichmap = null;
+  }
+
+  function(evt) {
+    this.whichmap = evt
+    console.log(this.whichmap)
+  }
+
 
   render() {
     return (
-      <app>
+      <div>
         <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
           <Navbar.Brand href="#home">Flood Zone</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -24,12 +34,10 @@ export default class App extends Component {
             <Nav className="mr-auto">
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#link">Link</Nav.Link>
-              <NavDropdown title="Resources" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+              <NavDropdown title="Resources" id="basic-nav-dropdown" onSelect={function (evt) { console.log(evt) }}>
+                <NavDropdown.Item eventKey="map1">Action</NavDropdown.Item>
+                <NavDropdown.Item eventKey="map2">Another action</NavDropdown.Item>
+                <NavDropdown.Item eventKey="map3">Something</NavDropdown.Item>
               </NavDropdown>
             </Nav>
             <Form inline>
@@ -38,13 +46,13 @@ export default class App extends Component {
             </Form>
           </Navbar.Collapse>
         </Navbar>
-        <Map1></Map1>
-      </app>
+        {this.whichmap === "map1" && <Map1></Map1>}
+      </div>
     );
   }
 
 }
 
 export function renderToDOM(container) {
-  render(<App />, container);
+  render(<div />, container);
 }
