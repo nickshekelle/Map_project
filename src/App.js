@@ -47,7 +47,7 @@ export default class App extends Component {
               <Nav className="mr-auto">
                 <Nav.Link href="#home">Home</Nav.Link>
                 <Nav.Link href="#link">Link</Nav.Link>
-                <NavDropdown title="Maps" id="basic-nav-dropdown">
+                <NavDropdown title="Change Map" id="basic-nav-dropdown">
                   <NavDropdown.Item onClick={this.change_to_map1}>Map1</NavDropdown.Item>
                   <NavDropdown.Item onClick={this.change_to_map2}>Map2</NavDropdown.Item>
                   <NavDropdown.Item onClick={this.change_to_map3}>Map3</NavDropdown.Item>
@@ -73,7 +73,7 @@ export default class App extends Component {
               <Nav className="mr-auto">
                 <Nav.Link href="#home">Home</Nav.Link>
                 <Nav.Link href="#link">Link</Nav.Link>
-                <NavDropdown title="Resources" id="basic-nav-dropdown" onSelect={function (evt) { console.log(evt) }}>
+                <NavDropdown title="Change Map" id="basic-nav-dropdown" onSelect={function (evt) { console.log(evt) }}>
                   <NavDropdown.Item onClick={this.change_to_map1}>Map1</NavDropdown.Item>
                   <NavDropdown.Item onClick={this.change_to_map2}>Map2</NavDropdown.Item>
                   <NavDropdown.Item onClick={this.change_to_map3}>Map3</NavDropdown.Item>
@@ -97,7 +97,7 @@ export default class App extends Component {
               <Nav className="mr-auto">
                 <Nav.Link href="#home">Home</Nav.Link>
                 <Nav.Link href="#link">Link</Nav.Link>
-                <NavDropdown title="Resources" id="basic-nav-dropdown" onSelect={function (evt) { console.log(evt) }}>
+                <NavDropdown title="Change Map" id="basic-nav-dropdown" onSelect={function (evt) { console.log(evt) }}>
                   <NavDropdown.Item onClick={this.change_to_map1}>Map1</NavDropdown.Item>
                   <NavDropdown.Item onClick={this.change_to_map2}>Map2</NavDropdown.Item>
                   <NavDropdown.Item onClick={this.change_to_map3}>Map3</NavDropdown.Item>
