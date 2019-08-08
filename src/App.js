@@ -15,7 +15,7 @@ import Button from 'react-bootstrap/Button'
 export default class App extends Component {
   constructor(props) {
     super(props);
-    var whichmap = null;
+    this.whichmap = "map1";
   }
 
   function(evt) {
@@ -55,4 +55,5 @@ export default class App extends Component {
 
 export function renderToDOM(container) {
   render(<div />, container);
+  render(<Map1 />, container);
 }
