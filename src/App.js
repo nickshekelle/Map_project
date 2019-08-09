@@ -85,6 +85,7 @@ export default class App extends Component {
               </Form>
             </Navbar.Collapse>
           </Navbar>
+          <Map2></Map2>
         </div>
       );
     } else if (this.state.view === "map3") {
@@ -109,6 +110,7 @@ export default class App extends Component {
               </Form>
             </Navbar.Collapse>
           </Navbar>
+          <Map3></Map3>
         </div>
       );
     }
