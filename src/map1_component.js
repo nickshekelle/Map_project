@@ -70,7 +70,7 @@ export default class Map1 extends Component {
         wireframe: true,
         fp64: true,
         getElevation: f => Math.sqrt(f.properties.BlackRF2010and2011) * 1000,
-        getFillColor: f => COLOR_SCALE(0),
+        getFillColor: f => COLOR_SCALE(f.properties.BlackRF2010and2011 * 1.0 / 3),
         getLineColor: [255, 255, 255],
         pickable: true,
         onHover: this._onHover
@@ -82,20 +82,14 @@ export default class Map1 extends Component {
     const { x, y, hoveredObject } = this.state;
     return (
       hoveredObject && (
-        <div className="tooltip" style={{ top: y, left: x }}>
+        <div className="tooltip" style={{ top: y, left: x, zIndex: 9 }}>
           <div>
-            <b>Average Property Value</b>
+            <b>Average Density</b>
           </div>
           <div>
-            <div>${hoveredObject.properties.valuePerParcel} / parcel</div>
-            <div>
-              ${hoveredObject.properties.valuePerSqm} / m<sup>2</sup>
-            </div>
+            <div>{hoveredObject.properties.BlackRF2010and2011}</div>
           </div>
-          <div>
-            <b>Growth</b>
-          </div>
-          <div>{Math.round(hoveredObject.properties.growth * 100)}%</div>
+          <div>{Math.round(hoveredObject.properties.BlackRF2010and2011 * 100)}%</div>
         </div>
       )
     );
@@ -112,7 +106,6 @@ export default class Map1 extends Component {
           preventStyleDiffing={true}
           mapboxApiAccessToken={MAPBOX_TOKEN}
         />
-
         {this._renderTooltip}
       </DeckGL>
     );
