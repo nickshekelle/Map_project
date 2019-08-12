@@ -59,7 +59,7 @@ export default class App extends Component {
               </Form>
             </Navbar.Collapse>
           </Navbar>
-          <Map1 ></Map1>
+          <Map1></Map1>
         </div>
       );
     }
