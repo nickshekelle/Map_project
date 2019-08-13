@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
 import { StaticMap } from 'react-map-gl';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
 import { scaleThreshold } from 'd3-scale';
 
 
 // Set your mapbox token here
-const MAPBOX_TOKEN = "pk.eyJ1Ijoibmlja3NoZWtlbGxlIiwiYSI6ImNqeW90aWhrODE4Y20zbXA3eGNkZ2JsankifQ.ge-O4WjAvMnMBBo8rBpScw"; // eslint-disable-line
+const MAPBOX_TOKEN = "pk.eyJ1Ijoibmlja3NoZWtlbGxlIiwiYSI6ImNqeW90aWhrODE4Y20zbXA3eGNkZ2JsankifQ.ge-O4WjAvMnMBBo8rBpScw";
 
 // Source data GeoJSON
 const DATA_URL =
-    'https://raw.githubusercontent.com/nickshekelle/Map_project/master/Black_Rockfish_Mean_Density__North_Central_Coast__201011__PISCO_%5Bds1358%5D.geojson'; // eslint-disable-line
+    'https://raw.githubusercontent.com/nickshekelle/Map_project/master/Cancer_Rates.geojson';
 
 export const COLOR_SCALE = scaleThreshold()
     .domain([-0.6, -0.45, -0.3, -0.15, 0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2])
@@ -34,25 +33,24 @@ export const COLOR_SCALE = scaleThreshold()
 const INITIAL_VIEW_STATE = {
     width: window.innerWidth,
     height: window.innerHeight,
-    longitude: -120.648,
-    latitude: 38.648,
-    zoom: 7,
+    longitude: -87.900,
+    latitude: 42.279,
+    zoom: 9.6,
     maxZoom: 16,
-    bearing: 0
+    bearing: 5,
+    pitch: 60
 };
 
-export default class Map1 extends Component {
+export default class Map3 extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             hoveredObject: null
         };
-        this._onHover = this._onHover.bind(this);
-        this._renderTooltip = this._renderTooltip.bind(this);
     }
 
-    _onHover({ x, y, object }) {
+    _onHover = ({ x, y, object }) => {
         this.setState({ x, y, hoveredObject: object });
     }
 
@@ -69,8 +67,8 @@ export default class Map1 extends Component {
                 extruded: true,
                 wireframe: true,
                 fp64: true,
-                getElevation: f => Math.sqrt(f.properties.BlackRF2010and2011) * 1000,
-                getFillColor: f => COLOR_SCALE(0),
+                getElevation: f => f.properties.All_Cancer,
+                getFillColor: f => COLOR_SCALE(f.properties.All_Cancer / 6000.0),
                 getLineColor: [255, 255, 255],
                 pickable: true,
                 onHover: this._onHover
@@ -78,31 +76,29 @@ export default class Map1 extends Component {
         ];
     }
 
-    _renderTooltip() {
+    _renderTooltip = () => {
         const { x, y, hoveredObject } = this.state;
         return (
             hoveredObject && (
-                <div className="tooltip" style={{ top: y, left: x }}>
+                <div className="tooltip" style={{ top: y, left: x, opacity: 1 }}>
                     <div>
-                        <b>Average Property Value</b>
+                        <b>Cancer Rates</b>
                     </div>
                     <div>
-                        <div>${hoveredObject.properties.valuePerParcel} / parcel</div>
-                        <div>
-                            ${hoveredObject.properties.valuePerSqm} / m<sup>2</sup>
-                        </div>
+                        <div>All Cancer: {Math.round(hoveredObject.properties.All_Cancer)} per 100,000 persons</div>
+                        <div>Breast Cancer: {Math.round(hoveredObject.properties.Breast_Can)} per 100,000 persons</div>
+                        <div>Colorectal Cancer: {Math.round(hoveredObject.properties.Colorectal)} per 100,000 persons</div>
+                        <div>Lung Cancer: {Math.round(hoveredObject.properties.Lung_Bronc)} per 100,000 persons</div>
+                        <div>Prostate Cancer: {Math.round(hoveredObject.properties.Prostate_C)} per 100,000 persons</div>
+                        <div>Urinary Cancer: {Math.round(hoveredObject.properties.Urinary_Sy)} per 100,000 persons</div>
                     </div>
-                    <div>
-                        <b>Growth</b>
-                    </div>
-                    <div>{Math.round(hoveredObject.properties.growth * 100)}%</div>
                 </div>
             )
         );
     }
 
     render() {
-        const { mapStyle = 'mapbox://styles/nickshekelle/cjz4qge2k07wx1cpg1jsri6we' } = this.props;
+        const { mapStyle = 'mapbox://styles/nickshekelle/cjyrg5pcc26c11cjvbejtc79l' } = this.props;
 
         return (
             <DeckGL layers={this._renderLayers()} initialViewState={INITIAL_VIEW_STATE} controller={true}>
@@ -112,13 +108,8 @@ export default class Map1 extends Component {
                     preventStyleDiffing={true}
                     mapboxApiAccessToken={MAPBOX_TOKEN}
                 />
-
                 {this._renderTooltip}
             </DeckGL>
         );
     }
-}
-
-export function renderToDOM(container) {
-    render(<Map1 />, container);
 }

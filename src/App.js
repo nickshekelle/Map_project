@@ -53,10 +53,6 @@ export default class App extends Component {
                   <NavDropdown.Item onClick={this.change_to_map3}>Map3</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
-              <Form inline>
-                <FormControl type="text" placeholder="address..." className="mr-sm-2" />
-                <Button variant="outline-success">Am I in a flood plain?</Button>
-              </Form>
             </Navbar.Collapse>
           </Navbar>
           <Map1></Map1>
@@ -79,10 +75,6 @@ export default class App extends Component {
                   <NavDropdown.Item onClick={this.change_to_map3}>Map3</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
-              <Form inline>
-                <FormControl type="text" placeholder="address..." className="mr-sm-2" />
-                <Button variant="outline-success">Am I in a flood plain?</Button>
-              </Form>
             </Navbar.Collapse>
           </Navbar>
           <Map2></Map2>
@@ -104,10 +96,6 @@ export default class App extends Component {
                   <NavDropdown.Item onClick={this.change_to_map3}>Map3</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
-              <Form inline>
-                <FormControl type="text" placeholder="address..." className="mr-sm-2" />
-                <Button variant="outline-success">Am I in a flood plain?</Button>
-              </Form>
             </Navbar.Collapse>
           </Navbar>
           <Map3></Map3>

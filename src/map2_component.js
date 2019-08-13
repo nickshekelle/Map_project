@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
 import { StaticMap } from 'react-map-gl';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
 import { scaleThreshold } from 'd3-scale';
@@ -34,25 +33,24 @@ export const COLOR_SCALE = scaleThreshold()
 const INITIAL_VIEW_STATE = {
     width: window.innerWidth,
     height: window.innerHeight,
-    longitude: -120.648,
-    latitude: 38.648,
-    zoom: 7,
+    longitude: -123.626,
+    latitude: 38.825,
+    zoom: 8.5,
     maxZoom: 16,
-    bearing: 0
+    bearing: 10,
+    pitch: 60
 };
 
-export default class Map1 extends Component {
+export default class Map2 extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             hoveredObject: null
         };
-        this._onHover = this._onHover.bind(this);
-        this._renderTooltip = this._renderTooltip.bind(this);
     }
 
-    _onHover({ x, y, object }) {
+    _onHover = ({ x, y, object }) => {
         this.setState({ x, y, hoveredObject: object });
     }
 
@@ -70,7 +68,7 @@ export default class Map1 extends Component {
                 wireframe: true,
                 fp64: true,
                 getElevation: f => Math.sqrt(f.properties.BlackRF2010and2011) * 1000,
-                getFillColor: f => COLOR_SCALE(0),
+                getFillColor: f => COLOR_SCALE(f.properties.BlackRF2010and2011 * 1.0 / 4),
                 getLineColor: [255, 255, 255],
                 pickable: true,
                 onHover: this._onHover
@@ -78,31 +76,24 @@ export default class Map1 extends Component {
         ];
     }
 
-    _renderTooltip() {
+    _renderTooltip = () => {
         const { x, y, hoveredObject } = this.state;
         return (
             hoveredObject && (
-                <div className="tooltip" style={{ top: y, left: x }}>
+                <div className="tooltip" style={{ top: y, left: x, opacity: 1 }}>
                     <div>
-                        <b>Average Property Value</b>
+                        <b>China Rockfish Density</b>
                     </div>
                     <div>
-                        <div>${hoveredObject.properties.valuePerParcel} / parcel</div>
-                        <div>
-                            ${hoveredObject.properties.valuePerSqm} / m<sup>2</sup>
-                        </div>
+                        <div>{Math.round(hoveredObject.properties.BlackRF2010and2011 * 10000) / 1000} / 100m<sup>2</sup></div>
                     </div>
-                    <div>
-                        <b>Growth</b>
-                    </div>
-                    <div>{Math.round(hoveredObject.properties.growth * 100)}%</div>
                 </div>
             )
         );
     }
 
     render() {
-        const { mapStyle = 'mapbox://styles/nickshekelle/cjyqqanik0kcc1crk89bmnvkp' } = this.props;
+        const { mapStyle = 'mapbox://styles/nickshekelle/cjyrg5pcc26c11cjvbejtc79l' } = this.props;
 
         return (
             <DeckGL layers={this._renderLayers()} initialViewState={INITIAL_VIEW_STATE} controller={true}>
@@ -112,13 +103,8 @@ export default class Map1 extends Component {
                     preventStyleDiffing={true}
                     mapboxApiAccessToken={MAPBOX_TOKEN}
                 />
-
                 {this._renderTooltip}
             </DeckGL>
         );
     }
-}
-
-export function renderToDOM(container) {
-    render(<Map1 />, container);
 }

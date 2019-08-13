@@ -93,7 +93,7 @@ export default class Map1 extends Component {
   }
 
   render() {
-    const { mapStyle = 'mapbox://styles/nickshekelle/cjyrg5pcc26c11cjvbejtc79l' } = this.props;
+    const { mapStyle = 'mapbox://styles/nickshekelle/cjz4qge2k07wx1cpg1jsri6we' } = this.props;
 
     return (
       <DeckGL layers={this._renderLayers()} initialViewState={INITIAL_VIEW_STATE} controller={true}>
