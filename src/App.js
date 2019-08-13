@@ -7,9 +7,8 @@ import Map3 from "./map3_component.js"
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Nav from 'react-bootstrap/Nav'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button'
+
+import "./index.css";
 
 
 
@@ -17,11 +16,15 @@ import Button from 'react-bootstrap/Button'
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { view: 'map1' };
+    this.state = { view: 'home' };
 
     this.change_to_map1 = this.change_to_map1.bind(this);
     this.change_to_map2 = this.change_to_map2.bind(this);
     this.change_to_map3 = this.change_to_map3.bind(this);
+  }
+
+  back_to_home() {
+    this.setState({ view: 'home' });
   }
 
   change_to_map1() {
@@ -36,25 +39,38 @@ export default class App extends Component {
     this.setState({ view: 'map3' });
   }
 
+
   render() {
-    if (this.state.view === 'map1') {
+
+    const navigator = (<Navbar bg="dark" variant="dark" expand="lg" fixed="top">
+      <Navbar.Brand href="#home">Flood Zone</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Link onClick={this.back_to_home}>Home</Nav.Link>
+          <Nav.Link href="#link">Link</Nav.Link>
+          <NavDropdown title="Change Map" id="basic-nav-dropdown">
+            <NavDropdown.Item onClick={this.change_to_map1}>Map1</NavDropdown.Item>
+            <NavDropdown.Item onClick={this.change_to_map2}>Map2</NavDropdown.Item>
+            <NavDropdown.Item onClick={this.change_to_map3}>Map3</NavDropdown.Item>
+          </NavDropdown>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>);
+
+    if (this.state.view === 'home') {
       return (
         <div>
-          <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
-            <Navbar.Brand href="#home">Flood Zone</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#link">Link</Nav.Link>
-                <NavDropdown title="Change Map" id="basic-nav-dropdown">
-                  <NavDropdown.Item onClick={this.change_to_map1}>Map1</NavDropdown.Item>
-                  <NavDropdown.Item onClick={this.change_to_map2}>Map2</NavDropdown.Item>
-                  <NavDropdown.Item onClick={this.change_to_map3}>Map3</NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
+          {navigator}
+
+
+        </div>
+      );
+    }
+    else if (this.state.view === 'map1') {
+      return (
+        <div>
+          {navigator}
           <Map1></Map1>
         </div>
       );
@@ -62,42 +78,14 @@ export default class App extends Component {
     else if (this.state.view === "map2") {
       return (
         <div>
-          <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
-            <Navbar.Brand href="#home">Flood Zone</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#link">Link</Nav.Link>
-                <NavDropdown title="Change Map" id="basic-nav-dropdown" onSelect={function (evt) { console.log(evt) }}>
-                  <NavDropdown.Item onClick={this.change_to_map1}>Map1</NavDropdown.Item>
-                  <NavDropdown.Item onClick={this.change_to_map2}>Map2</NavDropdown.Item>
-                  <NavDropdown.Item onClick={this.change_to_map3}>Map3</NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
+          {navigator}
           <Map2></Map2>
         </div>
       );
     } else if (this.state.view === "map3") {
       return (
         <div>
-          <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
-            <Navbar.Brand href="#home">Flood Zone</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#link">Link</Nav.Link>
-                <NavDropdown title="Change Map" id="basic-nav-dropdown" onSelect={function (evt) { console.log(evt) }}>
-                  <NavDropdown.Item onClick={this.change_to_map1}>Map1</NavDropdown.Item>
-                  <NavDropdown.Item onClick={this.change_to_map2}>Map2</NavDropdown.Item>
-                  <NavDropdown.Item onClick={this.change_to_map3}>Map3</NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
+          {navigator}
           <Map3></Map3>
         </div>
       );
