@@ -12,13 +12,12 @@ const DATA_URL =
   'https://raw.githubusercontent.com/nickshekelle/Map_project/master/Black_Rockfish_Mean_Density__North_Central_Coast__201011__PISCO_%5Bds1358%5D.geojson'; // eslint-disable-line
 
 export const COLOR_SCALE = scaleThreshold()
-  .domain([-0.6, -0.45, -0.3, -0.15, 0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2])
+  .domain([0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48])
   .range([
     [65, 182, 196],
     [127, 205, 187],
     [199, 233, 180],
     [237, 248, 177],
-    // zero
     [255, 255, 204],
     [255, 237, 160],
     [254, 217, 118],
@@ -68,7 +67,7 @@ export default class Map1 extends Component {
         wireframe: true,
         fp64: true,
         getElevation: f => Math.sqrt(f.properties.BlackRF2010and2011) * 1000,
-        getFillColor: f => COLOR_SCALE(f.properties.BlackRF2010and2011 * 1.0 / 4),
+        getFillColor: f => COLOR_SCALE(f.properties.BlackRF2010and2011 * 10),
         getLineColor: [255, 255, 255],
         pickable: true,
         onHover: this._onHover
@@ -91,6 +90,8 @@ export default class Map1 extends Component {
       )
     );
   }
+
+
 
   render() {
     const { mapStyle = 'mapbox://styles/nickshekelle/cjz4qge2k07wx1cpg1jsri6we' } = this.props;

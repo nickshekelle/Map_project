@@ -51,7 +51,7 @@ export default class App extends Component {
   render() {
 
     const navigator = (<Navbar bg="dark" variant="dark" expand="lg" fixed="top">
-      <Navbar.Brand onClick={this.back_to_home}>MapHub</Navbar.Brand>
+      <Navbar.Brand onClick={this.back_to_home}>MapRange</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
@@ -75,7 +75,7 @@ export default class App extends Component {
                 <MDBRow>
                   <MDBAnimation type="fadeInLeft" delay=".3s">
                     <h1 className="h1-responsive font-weight-bold mt-sm-5">
-                      Welcome to MapHub
+                      Welcome to MapRange
                     </h1>
                     <hr className="hr-light" />
                     <h6 className="mb-4">
