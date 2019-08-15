@@ -91,7 +91,30 @@ export default class Map1 extends Component {
     );
   }
 
+  renderLegend = () => {
+    var legend = document.createElement('legend')
+    var layers = ["0-4", "4-8", "8-12", "12-16", "16-20", "20-24", "24-28", "28-32", "32-36", "36-40", "40-44", "44-48", "48+"]
+    for (var i = 0; i < layers.length; i++) {
+      var layer = layers[i];
+      var color = COLOR_SCALE.range[i];
+      var item = document.createElement('div');
+      var key = document.createElement('span');
+      key.className = 'legend-key';
+      key.style.backgroundColor = color;
 
+      var value = document.createElement('span');
+      value.innerHTML = layer;
+      item.appendChild(key);
+      item.appendChild(value);
+      legend.appendChild(item);
+      return (
+        <h1>
+          <li>{layers}</li>
+        </h1>
+      );
+    }
+
+  }
 
   render() {
     const { mapStyle = 'mapbox://styles/nickshekelle/cjz4qge2k07wx1cpg1jsri6we' } = this.props;
@@ -105,6 +128,7 @@ export default class Map1 extends Component {
           mapboxApiAccessToken={MAPBOX_TOKEN}
         />
         {this._renderTooltip}
+        {this.renderLegend}
       </DeckGL>
     );
   }
