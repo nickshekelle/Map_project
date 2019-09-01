@@ -6,6 +6,6 @@ The interactive map is created with MapBox and the 3D Data visulaization is crea
 
 To pan the map, hold shift and drag with the mouse
 
-Check it out in the 
+Check it out in the "Environment" tab
 
 
