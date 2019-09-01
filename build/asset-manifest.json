@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/Map_project/static/css/main.47421afb.chunk.css",
+    "main.js": "/Map_project/static/js/main.6ba9c617.chunk.js",
+    "main.js.map": "/Map_project/static/js/main.6ba9c617.chunk.js.map",
+    "runtime~main.js": "/Map_project/static/js/runtime~main.20717c26.js",
+    "runtime~main.js.map": "/Map_project/static/js/runtime~main.20717c26.js.map",
+    "static/css/2.cd4668f9.chunk.css": "/Map_project/static/css/2.cd4668f9.chunk.css",
+    "static/js/2.7681e9e1.chunk.js": "/Map_project/static/js/2.7681e9e1.chunk.js",
+    "static/js/2.7681e9e1.chunk.js.map": "/Map_project/static/js/2.7681e9e1.chunk.js.map",
+    "index.html": "/Map_project/index.html",
+    "precache-manifest.46f30f1f746b76facfee7aa1ba0ad148.js": "/Map_project/precache-manifest.46f30f1f746b76facfee7aa1ba0ad148.js",
+    "service-worker.js": "/Map_project/service-worker.js",
+    "static/css/2.cd4668f9.chunk.css.map": "/Map_project/static/css/2.cd4668f9.chunk.css.map",
+    "static/css/main.47421afb.chunk.css.map": "/Map_project/static/css/main.47421afb.chunk.css.map",
+    "static/media/mdb.css": "/Map_project/static/media/arrow_right.8ef6a08c.svg"
+  }
+}

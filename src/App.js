@@ -56,10 +56,8 @@ export default class App extends Component {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link onClick={this.back_to_home}>Home</Nav.Link>
-          <Nav.Link href="#link">Link</Nav.Link>
           <NavDropdown title="Select Map" id="basic-nav-dropdown">
             <NavDropdown.Item onClick={this.change_to_map1}>Rockfish Densities</NavDropdown.Item>
-            <NavDropdown.Item onClick={this.change_to_map2}>Map2</NavDropdown.Item>
             <NavDropdown.Item onClick={this.change_to_map3}>Cancer Rates</NavDropdown.Item>
           </NavDropdown>
         </Nav>
