@@ -2,10 +2,12 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://nickshekelle.github.io/Map_project",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "d3-scale": "^3.0.1",
     "deck.gl": "^7.1.11",
+    "gh-pages": "^2.1.1",
     "mapbox-gl": "^1.1.1",
     "mdbreact": "^4.19.0",
     "react": "^16.8.6",
@@ -15,6 +17,8 @@
     "react-scripts": "3.0.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
