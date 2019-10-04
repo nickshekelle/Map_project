@@ -5,20 +5,19 @@ import { scaleThreshold } from 'd3-scale';
 
 
 // Set your mapbox token here
-const MAPBOX_TOKEN = "pk.eyJ1Ijoibmlja3NoZWtlbGxlIiwiYSI6ImNqeW90aWhrODE4Y20zbXA3eGNkZ2JsankifQ.ge-O4WjAvMnMBBo8rBpScw"; // eslint-disable-line
+const MAPBOX_TOKEN = "pk.eyJ1Ijoibmlja3NoZWtlbGxlIiwiYSI6ImNqeW90aWhrODE4Y20zbXA3eGNkZ2JsankifQ.ge-O4WjAvMnMBBo8rBpScw";
 
 // Source data GeoJSON
 const DATA_URL =
-    'https://raw.githubusercontent.com/nickshekelle/Map_project/master/Black_Rockfish_Mean_Density__North_Central_Coast__201011__PISCO_%5Bds1358%5D.geojson'; // eslint-disable-line
+    'https://raw.githubusercontent.com/nickshekelle/Map_project/master/Cancer_Rates.geojson';
 
 export const COLOR_SCALE = scaleThreshold()
-    .domain([-0.6, -0.45, -0.3, -0.15, 0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2])
+    .domain([0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000])
     .range([
         [65, 182, 196],
         [127, 205, 187],
         [199, 233, 180],
         [237, 248, 177],
-        // zero
         [255, 255, 204],
         [255, 237, 160],
         [254, 217, 118],
@@ -33,11 +32,11 @@ export const COLOR_SCALE = scaleThreshold()
 const INITIAL_VIEW_STATE = {
     width: window.innerWidth,
     height: window.innerHeight,
-    longitude: -123.626,
-    latitude: 38.825,
-    zoom: 8.5,
+    longitude: -87.900,
+    latitude: 42.279,
+    zoom: 9.6,
     maxZoom: 16,
-    bearing: 10,
+    bearing: 5,
     pitch: 60
 };
 
@@ -67,8 +66,8 @@ export default class Map2 extends Component {
                 extruded: true,
                 wireframe: true,
                 fp64: true,
-                getElevation: f => Math.sqrt(f.properties.BlackRF2010and2011) * 1000,
-                getFillColor: f => COLOR_SCALE(f.properties.BlackRF2010and2011 * 1.0 / 4),
+                getElevation: f => f.properties.All_Cancer,
+                getFillColor: f => COLOR_SCALE(f.properties.All_Cancer),
                 getLineColor: [255, 255, 255],
                 pickable: true,
                 onHover: this._onHover
@@ -82,10 +81,15 @@ export default class Map2 extends Component {
             hoveredObject && (
                 <div className="tooltip" style={{ top: y, left: x, opacity: 1 }}>
                     <div>
-                        <b>China Rockfish Density</b>
+                        <b>Cancer Rates</b>
                     </div>
                     <div>
-                        <div>{Math.round(hoveredObject.properties.BlackRF2010and2011 * 10000) / 1000} / 100m<sup>2</sup></div>
+                        <div>All Cancer: {Math.round(hoveredObject.properties.All_Cancer)} per 100,000 persons</div>
+                        <div>Breast Cancer: {Math.round(hoveredObject.properties.Breast_Can)} per 100,000 persons</div>
+                        <div>Colorectal Cancer: {Math.round(hoveredObject.properties.Colorectal)} per 100,000 persons</div>
+                        <div>Lung Cancer: {Math.round(hoveredObject.properties.Lung_Bronc)} per 100,000 persons</div>
+                        <div>Prostate Cancer: {Math.round(hoveredObject.properties.Prostate_C)} per 100,000 persons</div>
+                        <div>Urinary Cancer: {Math.round(hoveredObject.properties.Urinary_Sy)} per 100,000 persons</div>
                     </div>
                 </div>
             )
